@@ -17,7 +17,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -25,39 +25,31 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-
     public function index()
     {
         return view('home');
     }
 
-    public function about()
-    {
-        return view('about');
-    }
-
-    public function contact()
-    {
-        return view('contact');
-    }
-
     public function test()
     {
-        //$users = Auth::user();
+        $user = Auth::user();
 
-        $user = User::find(15);
+        //$user = User::find(3);
 
         //$user->delete();
 
-        //$user = User::all();
+        //$users = User::all();
+        /*
+                 $users = User::where('id', 1)
+                    ->orderBy('name', 'desc')
+                    ->take(2)
+                    ->get();
+        */
+        //$users = DB::table('users')->get();
 
-        //$user = DB::table('cars')->get();
+        dd($user->cars());
 
-        $users = $user->cars;
-
-        //dd($users->cars());
-
-        //dd($user->count());
+        //dd($users);
 
         return view('test', ['variables' => $users]);
     }
